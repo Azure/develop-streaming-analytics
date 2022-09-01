@@ -1,0 +1,1 @@
+Scenario implemeantion with Azure Stream Analytics as core streaming engine

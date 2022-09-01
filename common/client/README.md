@@ -1,0 +1,1 @@
+This folder is to develop client simulator applications including the app that generate events and the app that receives real time streaming computation from Cloud
