@@ -1,14 +1,25 @@
-# Project
+# Overview
+This repo provides implementation examples in Azure with both Microsoft and OSS technologies for streaming analytic solution.
+It is used as accompanied content for the Develop Streaming Analytics Solution Workshop
+### Scenario
+Company X is operating a ride hailing service. Customers in an app to order for the ride service. A critical component of the solution is to set an optimal price that maximize profit. The algorithm mainly relies on real time demand and supply data to determine adjustment to current price. 
+In this implementation, we simplify the scenario to address following main features:
+-	Real time ride requests at various locations are captured and processed
+-	For every location, average request volume, average price over the last 5 minutes and base price policy (updated periodically) are inputs to pricing calculation algorithm. New price is recalculated every 20s.
+-	A live monitoring dashboard that shows requests volume and average price per location is used for operators
+-	A client web app that shows current price when a destination location is selected. It needs to display new price as soon as available so to minimize the risk of having to update the price after customer order to ride. 
 
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
+The implementations shows case following capabilities:
+-	Streaming ingestion from multiple sources including reference data and streaming data sources
+-	Parallelism in data ingestion and processing
+-	Join datasets
+-	State computation (* with custom state computation in Flink and Spark)
+-	ML model scoring 
+-	Latency difference between Flink, ASA and Spark (real streaming vs. mini-batch)
+-	Streaming serving options: Live reporting vs. triggering business workflow
+Following is the architecture for the demo implementation. Some components are implemented with a single technology, some are implemented using multiple technologies.
 
-As the maintainer of this project, please make a few updates:
-
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
+![Architecture](./media/architecture1.png)
 
 ## Contributing
 
