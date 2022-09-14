@@ -15,8 +15,8 @@ def parse_args():
     parser.add_argument("--duration", default=100, type=int, help="duration to run the simulator")
     parser.add_argument("--avail_duration", default=5, type=int, help="duration for car to appear as available in a location from start time")
 
-    parser.add_argument("--request_eh", type=str, default="ride_requests")
-    parser.add_argument("--supply_eh", type=str, default="car_availability")
+    parser.add_argument("--request_eh", type=str, default="requests")
+    parser.add_argument("--supply_eh", type=str, default="availability")
     # parse args
     args = parser.parse_args()
 
@@ -54,11 +54,11 @@ async def send_car_availability_batch(producer,avail_duration):
             event_batch.add(EventData(record))
         await producer.send_batch(event_batch)
 
-async def send_ride_requests(eh_name="ride_requests"):
+async def send_ride_requests(eh_name):
     producer = EventHubProducerClient.from_connection_string(conn_str=con_str, eventhub_name=eh_name)
     async with producer:
         await send_ride_request_batch(producer)
-async def send_car_availability(avail_duration, eh_name="car_availability"):
+async def send_car_availability(avail_duration, eh_name):
     producer = EventHubProducerClient.from_connection_string(conn_str=con_str, eventhub_name=eh_name)
     async with producer:
         await send_car_availability_batch(producer,avail_duration)
@@ -82,7 +82,7 @@ if __name__ == "__main__":
     duration = args.duration
     avail_duration = args.avail_duration
     request_eh = args.request_eh
-    supply_eh = args.request_eh
+    supply_eh = args.supply_eh
     execution_time=0
     batch =0
     while execution_time <duration:
