@@ -1,0 +1,20 @@
+{
+    "Name": "trips-eh",
+    "DataSourceType": "Event Hub",
+    "EventHubProperties": {
+        "ServiceBusNamespace": "kafkaeventhub01",
+        "EventHubName": "trips",
+        "SharedAccessPolicyName": "request_data_trips-eh_policy",
+        "SharedAccessPolicyKey": null,
+        "PartitionKey": null,
+        "PropertyColumns": [],
+        "AuthenticationMode": "ConnectionString"
+    },
+    "DataSourceCredentialDomain": "7b52949b-5064-4538-b8cc-931e5345f92f.StreamAnalystics",
+    "Serialization": {
+        "Type": "Json",
+        "Encoding": "UTF8",
+        "Format": "LineSeparated"
+    },
+    "ScriptType": "Output"
+}

@@ -21,6 +21,10 @@ Following is the architecture for the demo implementation. Some components are i
 
 ![Architecture](./media/architecture1.png)
 
+* Option 1: implementation with Azure Stream Analytics +
+* Option 2: implementation with Spark Structured Streaming in Databricks
+* Option 3: implementation with Flink 
+
 ## Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a

@@ -1,0 +1,1 @@
+New-AzCosmosDBSqlRoleAssignment -AccountName cosmos002  -ResourceGroupName bigdatalab-jamestn -RoleDefinitionId '00000000-0000-0000-0000-000000000002' -Scope "/" -PrincipalId 69d151a2-156a-43ea-9834-ab22d80256e1

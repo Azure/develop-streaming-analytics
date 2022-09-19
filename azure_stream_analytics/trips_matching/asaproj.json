@@ -1,0 +1,26 @@
+{
+    "name": "trips_matching",
+    "startFile": "Transformation.asaql",
+    "configurations": [
+        {
+            "filePath": "JobConfig.json",
+            "subType": "JobConfig"
+        },
+        {
+            "filePath": "Inputs/requests.json",
+            "subType": "Input"
+        },
+        {
+            "filePath": "Outputs/cosmosdb.json",
+            "subType": "Output"
+        },
+        {
+            "filePath": "Outputs/trips-eh.json",
+            "subType": "Output"
+        },
+        {
+            "filePath": "Inputs/cars.json",
+            "subType": "Input"
+        }
+    ]
+}

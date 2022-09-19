@@ -1,0 +1,14 @@
+with matched_trip as 
+(select cars.id as car_avail_id, requests.id as request_id, Cast(requests.timestamp as DateTime) as timestamp, requests.from_loc,requests.to_loc, requests.request_type, cars.location, cars.starttime
+ from cars 
+join requests  on cars.location = requests.from_loc and cars.car_type = requests.request_type
+and DATEDIFF(second,cars,requests) BETWEEN 0 AND 39  
+),
+result as
+(select request_id, car_avail_id,timestamp, from_loc,to_loc, request_type, location, starttime, 
+TopOne() over (partition by request_id order by timestamp  limit duration(second,39))  
+ from matched_trip )
+select request_id, car_avail_id,timestamp, from_loc,  to_loc,request_type, starttime   into cosmosdb from result PARTITION BY from_loc
+
+
+

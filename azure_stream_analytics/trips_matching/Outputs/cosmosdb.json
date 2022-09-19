@@ -1,0 +1,13 @@
+{
+    "Name": "cosmosdb",
+    "DataSourceType": "DocumentDB",
+    "DocumentDbProperties": {
+        "AccountId": "cosmos002",
+        "AccountKey": null,
+        "Database": "rideservice",
+        "ContainerName": "matched_trips",
+        "DocumentId": ""
+    },
+    "DataSourceCredentialDomain": "1f481252-b72c-4b52-ae7b-58a18408620d.StreamAnalystics",
+    "ScriptType": "Output"
+}

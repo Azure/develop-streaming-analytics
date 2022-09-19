@@ -1,0 +1,21 @@
+{
+    "Name": "requests",
+    "Type": "Data Stream",
+    "DataSourceType": "Event Hub",
+    "EventHubProperties": {
+        "ServiceBusNamespace": "kafkaeventhub01",
+        "EventHubName": "requests",
+        "SharedAccessPolicyName": "aml",
+        "SharedAccessPolicyKey": "********",
+        "ConsumerGroupName": "trips_matching_requests_consumer_group",
+        "AuthenticationMode": "ConnectionString"
+    },
+    "DataSourceCredentialDomain": "10ad9c83-98f0-4434-a48a-29338491aa61.StreamAnalystics",
+    "Serialization": {
+        "Type": "Json",
+        "Encoding": "UTF8"
+    },
+    "PartitionKey": "request_type",
+    "CompressionType": "None",
+    "ScriptType": "Input"
+}

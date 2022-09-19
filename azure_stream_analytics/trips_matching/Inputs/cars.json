@@ -1,0 +1,21 @@
+{
+    "Name": "cars",
+    "Type": "Data Stream",
+    "DataSourceType": "Event Hub",
+    "EventHubProperties": {
+        "ServiceBusNamespace": "kafkaeventhub01",
+        "EventHubName": "availability",
+        "SharedAccessPolicyName": "trips_matching_cars_policy",
+        "SharedAccessPolicyKey": "********",
+        "ConsumerGroupName": "trips_matching_cars_consumer_group",
+        "AuthenticationMode": "ConnectionString"
+    },
+    "DataSourceCredentialDomain": "77c1fb4e-739f-4298-901e-4935d6d39c58.StreamAnalystics",
+    "Serialization": {
+        "Type": "Json",
+        "Encoding": "UTF8"
+    },
+    "PartitionKey": "car_type",
+    "CompressionType": "None",
+    "ScriptType": "Input"
+}
