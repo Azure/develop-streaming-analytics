@@ -43,7 +43,7 @@ app.layout = html.Div([
         style={'padding': 40, 'flex': 1}
     ),
     html.Br(),
-    html.Div(id='matched_trip'),
+    html.Div(html.H2(id='matched_trip')),
 
 ])
 
@@ -89,17 +89,24 @@ def trip_matching(type, from_location, to_location, n_click):
     # Enumerate the returned items
     import json
     matched_trip =None
+    price = None
     i =0
+    start_time = time.time()
     while True and i <200:
     
         for item in container.query_items(
                 query=f'SELECT * FROM c  WHERE c.request_id="{id}"',
                 enable_cross_partition_query=True):
                 matched_trip = item['request_id']
+                price = item['actual_price']
                 break
         time.sleep(0.01)
         i+=1
-    return f'Matched trip {matched_trip}: from {from_location} to {to_location} with {type}'
+    if matched_trip:
+        duration = time.time()-start_time
+        return f'Found matching {type} car in {duration} seconds from {from_location} to {to_location}, price {price}, id {id}'
+    else:
+        return "No available car found, please try again"
 
 
 if __name__ == '__main__':

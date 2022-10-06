@@ -39,7 +39,7 @@ app.layout = html.Div([
         style={'padding': 40, 'flex': 1}
     ),
     html.Br(),
-    html.Div(id='matched_trip'),
+    html.Div( html.H2(id='matched_trip')),
 
 ])
 
