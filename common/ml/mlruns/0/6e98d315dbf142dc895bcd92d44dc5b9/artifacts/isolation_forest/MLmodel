@@ -1,0 +1,18 @@
+artifact_path: isolation_forest
+flavors:
+  python_function:
+    env: conda.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    python_version: 3.8.5
+  sklearn:
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.0.2
+model_uuid: da981cc1c6354ece9864f73d07d1da2c
+run_id: 6e98d315dbf142dc895bcd92d44dc5b9
+signature:
+  inputs: '[{"name": "location", "type": "string"}, {"name": "car_type", "type": "string"},
+    {"name": "hour", "type": "long"}, {"name": "count", "type": "long"}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "int32", "shape": [-1]}}]'
+utc_time_created: '2022-11-09 00:32:00.778942'
