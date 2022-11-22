@@ -1,0 +1,13 @@
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
+name: auto-encoder-1
+endpoint_name: anomaly-detection
+model: azureml:torch_autoencoder:3
+code_configuration:
+  code: ./
+  scoring_script: score.py
+instance_type: Standard_DS2_V2
+instance_count: 1
+environment:
+  conda_file: ./conda.yml
+  image: mcr.microsoft.com/azureml/minimal-ubuntu20.04-py38-cpu-inference:latest
+
