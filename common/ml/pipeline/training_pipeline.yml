@@ -1,0 +1,29 @@
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
+type: pipeline
+display_name: Training_pipeline
+experiment_name: Training_pipeline
+compute: azureml:cpu-cluster
+
+jobs:
+  train_job:
+    type: command
+    code: ../training
+    command: >-
+      python ml_training.py 
+      --prep_data ${{inputs.input_folder}}
+      --model_folder ${{outputs.model_folder}}
+      --run_mode ${{inputs.run_mode}}
+    inputs:
+      input_folder:
+        type: uri_folder
+        path: azureml://datastores/workspaceblobstore/paths/XXXXXXXXXXXX
+      run_mode: "remote"
+    outputs:
+      prep_data:
+        type: uri_folder
+        path: azureml://datastores/workspaceblobstore/paths/XXXXXXXXXXXXXX
+        mode: rw_mount
+    environment:
+      conda_file: ../training/conda_ml_training.yml
+      image: mcr.microsoft.com/azureml/openmpi3.1.2-ubuntu18.04:latest
+    description: Training
