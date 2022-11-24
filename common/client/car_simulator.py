@@ -14,7 +14,7 @@ import time
 app = Dash(__name__)
 locations = ["loc_"+str(i) for i in range(50)]
 types = ["x", "xl", "green", "comfort"]
-con_str ="Endpoint=sb://kafkaeventhub01.servicebus.windows.net/;SharedAccessKeyName=new;SharedAccessKey=rCRM1EPvMROfVvYmm/T9Yolu5cEc065nIPxz/IpFsZ8="
+con_str ="Endpoint=sb://kafkaeventhub01.servicebus.windows.net/;SharedAccessKeyName=new;SharedAccessKey=2RzQgMCiRZI6W7rekHLZyq/62ljzs7NENZd9DeZoyC8="
 # con_str = os.getenv('EH_CONN')
 eh_name= "availability"
 

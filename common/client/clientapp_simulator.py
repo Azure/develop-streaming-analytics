@@ -14,7 +14,7 @@ import time
 app = Dash(__name__)
 locations = ["loc_"+str(i) for i in range(50)]
 types = ["x", "xl", "green", "comfort"]
-con_str ="Endpoint=sb://kafkaeventhub01.servicebus.windows.net/;SharedAccessKeyName=new;SharedAccessKey=rCRM1EPvMROfVvYmm/T9Yolu5cEc065nIPxz/IpFsZ8="
+con_str ="Endpoint=sb://kafkaeventhub01.servicebus.windows.net/;SharedAccessKeyName=new;SharedAccessKey=2RzQgMCiRZI6W7rekHLZyq/62ljzs7NENZd9DeZoyC8="
 # con_str = os.getenv('EH_CONN')
 eh_name= "requests"
 
@@ -79,7 +79,7 @@ def trip_matching(type, from_location, to_location, n_click):
     print(id)
 
     URL ="https://cosmos002.documents.azure.com:443/"
-    KEY ="8MBNeyCczgFTYnI7GA37RGg2XVmdxic1Nh8j8XrvFEWClVT3qw9kGqVRYPSALQn7mkDKp3cLTzC2kNP5buGf5w=="
+    KEY ="8wepCzs3xZ6JjEv7fJW4LamaU7EhWFA8C0ZjvZENhNCgiOR9fq4tacwi87LrLQtCFFRq0gvLAU11ZhVCtYzMiQ=="
     client = CosmosClient(URL, credential=KEY)
     DATABASE_NAME = 'rideservice'
     database = client.get_database_client(DATABASE_NAME)

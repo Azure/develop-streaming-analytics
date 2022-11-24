@@ -1,1 +1,11 @@
 New-AzCosmosDBSqlRoleAssignment -AccountName cosmos002  -ResourceGroupName bigdatalab-jamestn -RoleDefinitionId '00000000-0000-0000-0000-000000000002' -Scope "/" -PrincipalId 69d151a2-156a-43ea-9834-ab22d80256e1
+
+az account set -s 840b5c5c-3f4a-459a-94fc-6bad2a969f9d
+az configure --defaults workspace=ws02ent group=ml location=westus
+
+az ml model create --name nyc-taxi-model --version 1 --type mlflow_model --path ./artifacts/model/ --registry-name <registry-name>
+
+
+az account set -s  0e9bace8-7a81-4922-83b5-d995ff706507
+
+az configure --defaults workspace=ws01ent group=azureml location=westus2

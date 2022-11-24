@@ -29,7 +29,7 @@ locations = ["loc_"+str(i) for i in range(20)]
 riders = ["r_"+str(i) for i in range(100000)]
 cars = ["c_"+str(i) for i in range(1000)]
 types = ["x", "xl", "green", "comfort"]
-con_str="Endpoint=sb://kafkaeventhub01.servicebus.windows.net/;SharedAccessKeyName=new;SharedAccessKey=rCRM1EPvMROfVvYmm/T9Yolu5cEc065nIPxz/IpFsZ8="
+con_str="Endpoint=sb://ehns001.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=jdA3aVnxMl8tmtkkZiW2WKUNsJ0/h0mnJaFmQvl0evQ="
 # con_str = os.getenv('EH_CONN')
 async def send_ride_request_batch(producer):
     # Without specifying partition_id or partition_key

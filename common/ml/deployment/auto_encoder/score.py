@@ -17,6 +17,7 @@ sample_input = StandardPythonParameterType({'data': pandas_sample_input})
 sample_output = StandardPythonParameterType([0, 1])
 outputs = StandardPythonParameterType({'Results':sample_output}) # 'Results' is case sensitive
 THRESHOLD = 40
+TIME_STEPS = 20
 class Autoencoder(T.nn.Module):  # 65-32-8-32-65
   def __init__(self):
     super(Autoencoder, self).__init__()
@@ -42,7 +43,7 @@ class Autoencoder(T.nn.Module):  # 65-32-8-32-65
     z = self.decode(z) 
     return z  # in [0.0, 1.0]
 # Called when the service is loaded
-def create_sequences(values, time_steps=20):
+def create_sequences(values, time_steps=TIME_STEPS):
     output = []  
     for i in range(len(values) - time_steps + 1):
         output.append(values[i : (i + time_steps)])
@@ -77,10 +78,17 @@ def init():
     transformer.fit(pd.DataFrame({"location":locations, "car_type":car_types, "count":range(20)}))
 
 def score(model, input, threshold ):
-    Y = model(input)  # should be same as X
-    errs = T.sum((input-Y)*(input-Y), dim=[1,2,3]).detach().numpy().tolist()  #
-
-    return [int(err>threshold) for err in errs]
+    transformed_data = pre_process(input)
+    Y = model(transformed_data)  # should be same as X
+    errs = T.sum((transformed_data-Y)*(transformed_data-Y), dim=[1,2,3]).detach().numpy().tolist()  #
+    anomalies = [int(err>threshold) for err in errs]
+    anomalous_data_indices = []
+    for data_idx in range(TIME_STEPS - 1, len(transformed_data) - TIME_STEPS + 1):
+        if np.all(anomalies[data_idx - TIME_STEPS + 1 : data_idx]):
+            anomalous_data_indices.append(data_idx)
+    anomalies =np.array([-1]*input.shape[0])
+    anomalies[anomalous_data_indices] =1
+    return anomalies.tolist()
 
 # Called when a request is received
 @input_schema('Inputs', sample_input) 
@@ -91,10 +99,9 @@ def run(Inputs):
     try:
         # Get the input data 
         data=Inputs['data']
-        transformed_data = pre_process(data)
         # Get a prediction from the model
         
-        predictions = score(model, transformed_data,THRESHOLD)
+        predictions = score(model, data,THRESHOLD)
         return predictions
     except Exception as e:
         error= str(e)
