@@ -1,5 +1,5 @@
 $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
-name: deployment2
+name: isolation-forest
 endpoint_name: anomaly-detection
 model: azureml:isolation_forest:1
 code_configuration:

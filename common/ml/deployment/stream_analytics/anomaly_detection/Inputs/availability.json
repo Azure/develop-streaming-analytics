@@ -1,0 +1,21 @@
+{
+    "Name": "availability",
+    "Type": "Data Stream",
+    "DataSourceType": "Event Hub",
+    "EventHubProperties": {
+        "ServiceBusNamespace": "ehns001",
+        "EventHubName": "availability",
+        "SharedAccessPolicyName": "RootManageSharedAccessKey",
+        "SharedAccessPolicyKey": "********",
+        "ConsumerGroupName": "stream_analytics",
+        "AuthenticationMode": "ConnectionString"
+    },
+    "DataSourceCredentialDomain": "b7f473c4-2aca-41b2-b3bc-ca20d7364b70.StreamAnalystics",
+    "Serialization": {
+        "Type": "Json",
+        "Encoding": "UTF8"
+    },
+    "PartitionKey": null,
+    "CompressionType": "None",
+    "ScriptType": "Input"
+}

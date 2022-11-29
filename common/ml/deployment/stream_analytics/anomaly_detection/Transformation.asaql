@@ -1,0 +1,11 @@
+WITH 
+DataFrame AS (
+SELECT System.Timestamp() timestamp, location, car_type,  count(*) as count 
+FROM availability timestamp by starttime GROUP BY  location, car_type, TumblingWindow(minute,1)  
+),
+anomaly_query as
+(
+SELECT  detectanomalyautoencoder(DataFrame) as detectanomaly, location, car_type, count, timestamp from DataFrame
+)
+select * into anomaly from anomaly_query  where detectanomaly = 1
+select * into adxc01 from anomaly_query ;

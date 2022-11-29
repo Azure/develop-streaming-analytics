@@ -1,0 +1,19 @@
+{
+    "Name": "anomaly",
+    "DataSourceType": "Event Hub",
+    "EventHubProperties": {
+        "ServiceBusNamespace": "ehns001",
+        "EventHubName": "anomaly_queue",
+        "SharedAccessPolicyName": "anomaly_detection_anomaly_policy",
+        "SharedAccessPolicyKey": null,
+        "PropertyColumns": [],
+        "AuthenticationMode": "ConnectionString"
+    },
+    "DataSourceCredentialDomain": "3747b434-6d0c-4bcf-ac03-6d88d41bf864.StreamAnalystics",
+    "Serialization": {
+        "Type": "Json",
+        "Encoding": "UTF8",
+        "Format": "LineSeparated"
+    },
+    "ScriptType": "Output"
+}

@@ -1,0 +1,11 @@
+{
+    "Name": "adxc01",
+    "DataSourceType": "Azure Data Explorer",
+    "AzureDataExplorerProperties": {
+        "Cluster": "https://adxc01.westus.kusto.windows.net",
+        "Database": "db01",
+        "Table": "anomaly_output",
+        "AuthenticationMode": "Msi"
+    },
+    "ScriptType": "Output"
+}

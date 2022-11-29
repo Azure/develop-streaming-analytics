@@ -1,0 +1,30 @@
+{
+    "name": "anomaly_detection",
+    "startFile": "Transformation.asaql",
+    "configurations": [
+        {
+            "filePath": "JobConfig.json",
+            "subType": "JobConfig"
+        },
+        {
+            "filePath": "Outputs/adxc01.json",
+            "subType": "Output"
+        },
+        {
+            "filePath": "Functions/detectanomaly.json",
+            "subType": "MLFunction"
+        },
+        {
+            "filePath": "Inputs/availability.json",
+            "subType": "Input"
+        },
+        {
+            "filePath": "Functions/detectanomalyautoencoder.json",
+            "subType": "MLFunction"
+        },
+        {
+            "filePath": "Outputs/anomaly.json",
+            "subType": "Output"
+        }
+    ]
+}

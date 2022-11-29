@@ -10,13 +10,13 @@ from inference_schema.schema_decorators import input_schema, output_schema
 from inference_schema.parameter_types.standard_py_parameter_type import StandardPythonParameterType
 from inference_schema.parameter_types.numpy_parameter_type import NumpyParameterType
 from inference_schema.parameter_types.pandas_parameter_type import PandasParameterType
-pandas_sample_input = PandasParameterType(pd.DataFrame({'location': ['loc_0', 'loc_0'], 'car_type': ['comfort', 'comfort'], 'hour':[15,16], 'count':[2,3]}))
+pandas_sample_input = PandasParameterType(pd.DataFrame({'location': ['loc_0', 'loc_0', 'loc_1', 'loc_2','loc_0', 'loc_0', 'loc_1', 'loc_2','loc_0', 'loc_0','loc_0', 'loc_0', 'loc_1', 'loc_2','loc_0', 'loc_0', 'loc_1', 'loc_2','loc_0', 'loc_0',], 'car_type': ['comfort', 'comfort', 'x', 'xl','comfort', 'comfort', 'x', 'xl','comfort', 'comfort', 'x', 'xl','comfort', 'comfort', 'x', 'xl','comfort', 'comfort', 'x', 'xl'], 'timestamp':["2022-11-07T17:05:00.000Z","2022-11-07T17:05:00.000Z","2022-11-07T17:05:00.000Z","2022-11-07T17:05:00.000Z","2022-11-07T17:05:00.000Z","2022-11-07T17:05:00.000Z","2022-11-07T17:05:00.000Z","2022-11-07T17:05:00.000Z","2022-11-07T17:05:00.000Z","2022-11-07T17:05:00.000Z","2022-11-07T17:05:00.000Z","2022-11-07T17:05:00.000Z","2022-11-07T17:05:00.000Z","2022-11-07T17:05:00.000Z","2022-11-07T17:05:00.000Z","2022-11-07T17:05:00.000Z","2022-11-07T17:05:00.000Z","2022-11-07T17:05:00.000Z","2022-11-07T17:05:00.000Z","2022-11-07T17:05:00.000Z"], 'count':[2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3]})
+)
 
 # This is a nested input sample, any item wrapped by `ParameterType` will be described by schema
 sample_input = StandardPythonParameterType({'data': pandas_sample_input})
-sample_output = StandardPythonParameterType([0, 1])
-outputs = StandardPythonParameterType({'Results':sample_output}) # 'Results' is case sensitive
-THRESHOLD = 40
+sample_output = StandardPythonParameterType([1, -1])
+THRESHOLD = 50
 TIME_STEPS = 20
 class Autoencoder(T.nn.Module):  # 65-32-8-32-65
   def __init__(self):
@@ -93,7 +93,7 @@ def score(model, input, threshold ):
 # Called when a request is received
 @input_schema('Inputs', sample_input) 
 # 'Inputs' is case sensitive
-@output_schema(outputs)
+@output_schema(sample_output)
 
 def run(Inputs):
     try:
@@ -102,6 +102,7 @@ def run(Inputs):
         # Get a prediction from the model
         
         predictions = score(model, data,THRESHOLD)
+        print("predictions ", predictions)
         return predictions
     except Exception as e:
         error= str(e)

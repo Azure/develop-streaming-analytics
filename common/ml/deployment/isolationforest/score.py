@@ -7,6 +7,7 @@ from inference_schema.schema_decorators import input_schema, output_schema
 from inference_schema.parameter_types.standard_py_parameter_type import StandardPythonParameterType
 from inference_schema.parameter_types.numpy_parameter_type import NumpyParameterType
 from inference_schema.parameter_types.pandas_parameter_type import PandasParameterType
+
 pandas_sample_input = PandasParameterType(pd.DataFrame({'location': ['loc_0', 'loc_0'], 'car_type': ['comfort', 'comfort'], 'hour':[15,16], 'count':[2,3]}))
 
 # This is a nested input sample, any item wrapped by `ParameterType` will be described by schema

@@ -1,0 +1,33 @@
+{
+    "Name": "detectanomaly",
+    "IntegrationType": "AzureMLService",
+    "Type": "Scalar",
+    "ScriptType": "MLFunction",
+    "URL": "https://anomaly-detection.westus.inference.ml.azure.com/score",
+    "Key": null,
+    "BatchSize": 10000,
+    "NumberOfParallelRequests": 3,
+    "FunctionInputs": [
+        {
+            "DataType": "record",
+            "IsConfigurationParameter": null
+        }
+    ],
+    "OutputType": "bigint",
+    "MLInputs": {
+        "name": "data",
+        "columnNames": [
+            {
+                "name": "data",
+                "dataType": "object",
+                "mapTo": 0
+            }
+        ]
+    },
+    "MLOutputs": [
+        {
+            "DataType": "int64"
+        }
+    ],
+    "CredentialDomain": null
+}

@@ -1,6 +1,6 @@
 $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
 name: auto-encoder-1
-endpoint_name: anomaly-detection
+endpoint_name: anomaly
 model: azureml:torch_autoencoder:3
 code_configuration:
   code: ./
