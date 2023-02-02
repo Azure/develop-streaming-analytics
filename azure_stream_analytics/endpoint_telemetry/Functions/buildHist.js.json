@@ -1,0 +1,32 @@
+{
+    "Name": "buildHist",
+    "Type": "Scalar",
+    "ScriptType": "JSFunction",
+    "FunctionInputs": [
+        {
+            "DataType": "any",
+            "IsConfigurationParameter": null
+        },
+        {
+            "DataType": "any",
+            "IsConfigurationParameter": null
+        },
+        {
+            "DataType": "any",
+            "IsConfigurationParameter": null
+        },
+        {
+            "DataType": "any",
+            "IsConfigurationParameter": null
+        },
+        {
+            "DataType": "any",
+            "IsConfigurationParameter": null
+        },
+        {
+            "DataType": "any",
+            "IsConfigurationParameter": null
+        }
+    ],
+    "OutputType": "array"
+}

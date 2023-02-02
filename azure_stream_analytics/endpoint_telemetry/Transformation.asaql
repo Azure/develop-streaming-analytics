@@ -1,0 +1,41 @@
+
+with
+-- If situations like { Cpu = 90} { Cpu = 90 } are possible and need to be cleaned up--   we can use initial step to remove duplicates.---- MSREF results in one event per m.ep_id @ m.eventtime
+msref as (  select m.ep_id, 
+    msr_eventtime = m.eventtime,         
+    m.msr, m.msr_val, 
+    att_values = CONCAT_WS(' ', attr.attr_0, attr.attr_1, attr.attr_2, attr.attr_3, attr.attr_4, attr.attr_5, attr.attr_6, attr.attr_7,attr.attr_8, attr.attr_9,attr.attr_10 ),
+    attr_time = attr.eventtime  
+    from measurement m timestamp by eventtime 
+     join attributeref as attr 
+     on attr.ep_id = m.ep_id -- ep_id = 1 && eventtime = t1 --> { Cpu = 80} { Cpu = 99 } { Mem = 1000 }),-- MSHOT results in zero or one row per ep_id @ m.eventtime
+),
+mshot as (  
+select ep_id,msr, msr_val, att_time = System.Timestamp(),
+attr_names = collect(attr),
+attr_values = collect(attr_val), 
+attr_times = collect(eventtime)  
+from 
+(select m.ep_id,m.msr,m.msr_val, att.attr, att.attr_val, att.eventtime from measurement m timestamp by eventtime join hotattribute att timestamp by eventtime 
+on m.ep_id = att.ep_id and DATEDIFF(second, m, att) BETWEEN -1 AND 0) as hot
+group by System.Timestamp(), ep_id,msr,msr_val ),
+-- COMBINED gets zero or one row from MSHOT and exactly one row from MSREF per ep_id @ eventtime-- so it can just be joined on timestamp equality which need to be collapsed into a single result row combining attributes.
+combined as (  
+    select msref.ep_id,msref.msr, 
+    msref.msr_val, 
+    msref.msr_eventtime,
+    mshot.attr_times,
+    mshot.attr_names,
+    effective_attributes= 
+    case when mshot.ep_id is null then 
+    msref.att_values
+    else udf.buildHist(mshot.attr_times,mshot.attr_values, mshot.attr_names,msref.att_values, msref.attr_time, msref.msr_eventtime) 
+    end 
+    from msref  left JOIN mshot 
+    on DATEDIFF(microsecond, msref, mshot) between -1 and 0
+    and msref.ep_id = mshot.ep_id
+     and msref.msr_eventtime = mshot.att_time 
+    and  msref.msr = mshot.msr and msref.msr_val = mshot.msr_val
+    ) 
+    
+select *from combined

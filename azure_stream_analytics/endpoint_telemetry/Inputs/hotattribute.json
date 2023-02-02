@@ -1,0 +1,21 @@
+{
+    "Name": "hotattribute",
+    "Type": "Data Stream",
+    "DataSourceType": "Event Hub",
+    "EventHubProperties": {
+        "ServiceBusNamespace": "ehns001",
+        "EventHubName": "endpoint_attributes",
+        "SharedAccessPolicyName": "endpoint_telemetry_hotattribute_policy",
+        "SharedAccessPolicyKey": "********",
+        "ConsumerGroupName": "endpoint_telemetry_hotattribute_consumer_group",
+        "AuthenticationMode": "ConnectionString"
+    },
+    "DataSourceCredentialDomain": "1b8f2765-13e3-4c25-961a-30d064d96d73.StreamAnalystics",
+    "Serialization": {
+        "Type": "Json",
+        "Encoding": "UTF8"
+    },
+    "PartitionKey": "",
+    "CompressionType": "None",
+    "ScriptType": "Input"
+}

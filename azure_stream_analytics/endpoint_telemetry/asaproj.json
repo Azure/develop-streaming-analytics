@@ -1,0 +1,26 @@
+{
+    "name": "endpoint_telemetry",
+    "startFile": "Transformation.asaql",
+    "configurations": [
+        {
+            "filePath": "Functions/buildHist.js.json",
+            "subType": "JSFunction"
+        },
+        {
+            "filePath": "Inputs/attributeref.json",
+            "subType": "Input"
+        },
+        {
+            "filePath": "JobConfig.json",
+            "subType": "JobConfig"
+        },
+        {
+            "filePath": "Inputs/measurement.json",
+            "subType": "Input"
+        },
+        {
+            "filePath": "Inputs/hotattribute.json",
+            "subType": "Input"
+        }
+    ]
+}

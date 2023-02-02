@@ -8,14 +8,11 @@ import asyncio
 from azure.cosmos import CosmosClient
 import os
 import time
-# URL = os.environ['ACCOUNT_URI']
-# KEY = os.environ['ACCOUNT_KEY']
 
 app = Dash(__name__)
 locations = ["loc_"+str(i) for i in range(50)]
 types = ["x", "xl", "green", "comfort"]
-con_str ="Endpoint=sb://kafkaeventhub01.servicebus.windows.net/;SharedAccessKeyName=new;SharedAccessKey=2RzQgMCiRZI6W7rekHLZyq/62ljzs7NENZd9DeZoyC8="
-# con_str = os.getenv('EH_CONN')
+con_str=os.getenv("EHCONN")
 eh_name= "requests"
 
 app.layout = html.Div([
@@ -51,10 +48,10 @@ app.layout = html.Div([
 async def send_ride_request_batch(producer, type, from_location, to_location):
     # Without specifying partition_id or partition_key
     # the events will be distributed to available partitions via round-robin.
-    timestamp = datetime.datetime.now()
-    id = "r_"+from_location+"_"+to_location+"_"+type+ str(timestamp.timestamp())
+    timestamp= datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S.%f0Z")
+    id = "r_"+from_location+"_"+to_location+"_"+type+ timestamp
 
-    record = json.dumps({"id":id,"timestamp":str(timestamp), "from_loc":from_location, "to_loc":to_location, "request_type":type})
+    record = json.dumps({"id":id,"timestamp":timestamp, "from_loc":from_location, "to_loc":to_location, "request_type":type})
     event_batch = await producer.create_batch(partition_key=type)
 
     event_batch.add(EventData(record))
@@ -78,8 +75,8 @@ def trip_matching(type, from_location, to_location, n_click):
     id= asyncio.run(send_request( type, from_location, to_location))
     print(id)
 
-    URL ="https://cosmos002.documents.azure.com:443/"
-    KEY ="8wepCzs3xZ6JjEv7fJW4LamaU7EhWFA8C0ZjvZENhNCgiOR9fq4tacwi87LrLQtCFFRq0gvLAU11ZhVCtYzMiQ=="
+    URL ="https://cosmosdbnative01.documentps.azure.com:443/"
+    KEY=os.getenv("COSMOSKEY")
     client = CosmosClient(URL, credential=KEY)
     DATABASE_NAME = 'rideservice'
     database = client.get_database_client(DATABASE_NAME)
@@ -110,4 +107,4 @@ def trip_matching(type, from_location, to_location, n_click):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True,port=8050)
+    app.run_server(debug=True,port=8052)

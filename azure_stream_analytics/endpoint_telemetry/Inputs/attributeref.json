@@ -1,0 +1,18 @@
+{
+    "Name": "attributeref",
+    "Type": "Reference data",
+    "DataSourceType": "SQL Database",
+    "SqlReferenceProperties": {
+        "Database": "demodb",
+        "Server": "msqldemo",
+        "User": "jamesn",
+        "Password": "********",
+        "FullSnapshotPath": "attributeref.snapshot.sql",
+        "RefreshType": "Execute periodically",
+        "RefreshRate": "00:05:00",
+        "DeltaSnapshotPath": null,
+        "AuthenticationMode": "ConnectionString"
+    },
+    "DataSourceCredentialDomain": "7265fba5-60f5-4e02-9edd-28d1883c16eb.StreamAnalystics",
+    "ScriptType": "Input"
+}
