@@ -11,7 +11,7 @@ msref as (  select m.ep_id,
      on attr.ep_id = m.ep_id -- ep_id = 1 && eventtime = t1 --> { Cpu = 80} { Cpu = 99 } { Mem = 1000 }),-- MSHOT results in zero or one row per ep_id @ m.eventtime
 ),
 mshot as (  
-select ep_id,msr, msr_val, att_time = System.Timestamp(),
+select ep_id,msr, msr_val, mshot_time = System.Timestamp(),
 attr_names = collect(attr),
 attr_values = collect(attr_val), 
 attr_times = collect(eventtime)  
@@ -34,7 +34,7 @@ combined as (
     from msref  left JOIN mshot 
     on DATEDIFF(microsecond, msref, mshot) between -1 and 0
     and msref.ep_id = mshot.ep_id
-     and msref.msr_eventtime = mshot.att_time 
+     and msref.msr_eventtime = mshot.mshot_time 
     and  msref.msr = mshot.msr and msref.msr_val = mshot.msr_val
     ) 
     
