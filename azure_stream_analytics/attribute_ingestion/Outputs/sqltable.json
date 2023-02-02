@@ -1,0 +1,16 @@
+{
+    "Name": "sqltable",
+    "DataSourceType": "SQL Database",
+    "SQLDatabaseProperties": {
+        "Database": "db01",
+        "Server": "msqldemo",
+        "User": "jamesn",
+        "Password": null,
+        "Table": "endpoint_conf_change",
+        "MaxWriterCount": 1,
+        "MaxBatchCount": 10000,
+        "AuthenticationMode": "ConnectionString"
+    },
+    "DataSourceCredentialDomain": null,
+    "ScriptType": "Output"
+}

@@ -1,0 +1,6 @@
+SELECT
+     ep_id, eventtime, attr as attr_name, attr_val as attr_value
+INTO
+    [sqltable]
+FROM
+    [hotattribute]
