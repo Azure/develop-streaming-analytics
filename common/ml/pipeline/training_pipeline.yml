@@ -1,0 +1,27 @@
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
+type: pipeline
+display_name: Training_pipeline
+experiment_name: Training_pipeline
+compute: azureml:ds15v2
+
+jobs:
+  train_job:
+    type: command
+    code: ../training
+    command: >-
+      python ml_training.py 
+      --prep_data ${{inputs.input_folder}}
+      --output_folder ${{outputs.output_folder}}
+      --run_mode ${{inputs.run_mode}}
+    inputs:
+      input_folder:
+        type: uri_folder
+        path: azureml://datastores/workspaceblobstore/paths/data/
+      run_mode: "remote"
+    outputs:
+      output_folder:
+        type: uri_folder
+        path: azureml://datastores/workspaceblobstore/paths/data/
+        mode: rw_mount
+    environment: azureml:AzureML-ACPT-pytorch-1.12-py38-cuda11.6-gpu:2
+    description: Training
